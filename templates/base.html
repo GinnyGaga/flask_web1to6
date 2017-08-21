@@ -6,6 +6,11 @@
 <link rel="shortcut icon" href="{{ url_for('static',filename='eg_mouse.jpg')}}" type="image/x-icon"><link rel="icon" href="{{url_for('static',filename='eg_mouse.jpg')}}" type="image/x-icon">
 {% endblock  %}
 
+{% block scripts  %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+
 {% block navbar %} <!导航条>
 <div class="navbar navbar-inverse" role="navigation">
 	<div class="container">
