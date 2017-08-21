@@ -1,6 +1,11 @@
 {% extends "bootstrap/base.html" %} <!导入base.html,实现模板继承>
 {% block title  %}Flasky{% endblock %} <!HTML文档头部内容>
 
+{% block head  %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static',filename='eg_mouse.jpg')}}" type="image/x-icon"><link rel="icon" href="{{url_for('static',filename='eg_mouse.jpg')}}" type="image/x-icon">
+{% endblock  %}
+
 {% block navbar %} <!导航条>
 <div class="navbar navbar-inverse" role="navigation">
 	<div class="container">
