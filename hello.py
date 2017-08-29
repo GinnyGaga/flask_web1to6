@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template, session, redirect, url_for
+#Flask:程序实例，redirect:重定向,render_template 函数把Jinja2 模板引擎集成到了程序中
 from flask_script import Manager,Shell
+#flask_script:Flask扩展,为程序添加一个命令行解析器，输出Manager类.
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import FlaskForm
@@ -13,7 +15,7 @@ from threading import Thread
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
+app = Flask(__name__) #程序实例
 app.config['SECRET_KEY'] = 'hard to guess string'
 app.config['SQLALCHEMY_DATABASE_URI'] =\
 	'sqlite:///' + os.path.join(basedir, 'data.sqlite')
@@ -63,8 +65,7 @@ def send_async_email(app,msg):
 
 
 def send_email(to,subject,template,**kwargs):
-	msg=Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX']+subject,
-				sender=app.config['FLASKY_MAIL_SENDER'],recipients=[to])
+	msg=Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX']+' '+ subject,sender=app.config['FLASKY_MAIL_SENDER'],recipients=[to])
 	msg.body=render_template(template+'.txt',**kwargs)
 	msg.html=render_template(template+'.html',**kwargs)
 	thr=Thread(target=send_async_email,args=[app,msg])
@@ -91,8 +92,8 @@ def internal_server_error(e):
 	return render_template('500.html'), 500
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+@app.route('/', methods=['GET', 'POST'])#路由
+def index():#视图函数
 	form = NameForm()
 	if form.validate_on_submit():
 		user = User.query.filter_by(username=form.name.data).first()
@@ -106,12 +107,19 @@ def index():
 		else:
 			session['known']=True
 		session['name']=form.name.data
-		form.name.data=''
-		return redirect(url_for('index'))
-	return render_template('index.html',
+		return redirect(url_for('index'))#生成辅助函数，重定向响应
+	return render_template('index.html',#模板的文件名
 		form=form,name=session.get('name'),
-		known=session.get('known',False))
+		known=session.get('known',False) #键值对) 
 
 
 if __name__ == '__main__':
 	manager.run()
+
+
+
+
+
+
+
+

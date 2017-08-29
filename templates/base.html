@@ -1,9 +1,9 @@
-{% extends "bootstrap/base.html" %}
+{% extends "bootstrap/base.html" %} <!extends指令声明这个模板衍生自base.html>
 
-{% block title %}Flasky{% endblock %}
+{% block title %}Flasky{% endblock %} <!block 标签定义的元素可在衍生模板中修改>
 
 {% block head %}
-{{ super() }}
+{{ super() }} <!注意新定义的head 块，在基模板中其内容不是空的，所以使用super() 获取原来的内容。>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 {% endblock %}
@@ -31,7 +31,7 @@
 
 {% block content %}
 <div class="container">
-    {% for message in get_flashed_messages() %}
+    {% for message in get_flashed_messages() %} <!使用for 循环实现在模板中渲染一组元素>
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ message }}
@@ -44,5 +44,5 @@
 
 {% block scripts %}
 {{ super() }}
-{{ moment.include_moment() }}
+{{ moment.include_moment() }} <!支持宏>
 {% endblock %}
