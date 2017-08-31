@@ -1,18 +1,23 @@
 <!基模板的衍生模板>
 {% extends "base.html" %}<!extends 指令声明这个模板衍生自base.html.在extends 指令之后，基模板中的块被
 重新定义,Jinja2 模板引擎会将其插入适当的位置>
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/wtf.html" as wtf %}<!。导入的bootstrap/wtf.html 文件中定义了一个使用Bootstrap 渲染Falsk-WTF 表单对象
+的辅助函数>
 
 {% block title %}Flasky{% endblock %}<!block 标签定义的元素可在衍生模板中修改>
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1><!模板的内容区现在有两部分。第一部分是页面头部，显示欢迎消息。这里用到了一个模板条件语句。Jinja2 中的条件语句格式为{% if condition %}...{% else %}...{% endif %}.如果条件的计算结果为True，那么渲染if 和else 指令之间的值。如果条件的计算结果为False，则渲染else 和endif 指令之间的值。在这个例子中，如果没有定义模板变量name，Web表单则会渲染字符串“Hello, Stranger!”。内容区的第二部分使用wtf.quick_form() 函数渲染NameForm 对象。>
 	{% if not known  %}
 	<p>Pleased to meet you!</p>
 	{% else  %}
 	<p>Happy to see you again!</p>
 	{% endif  %}
 </div>
-{{ wtf.quick_form(form) }}
+{{ wtf.quick_form(form) }}<!wtf.quick_form() 函数的参数为Flask-WTF 表单对象，使用Bootstrap 的默认
+样式渲染传入的表单>
 {% endblock %}
+
+<!Jinja2 中的条件语句格式为{% if condition %}...{% else %}...{% endif %}>
+

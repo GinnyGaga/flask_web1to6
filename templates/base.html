@@ -5,6 +5,7 @@
 {% block head %}
 {{ super() }}<!注意新定义的head 块，在基模板中其内容不是空的，所以使用super() 获取原来的内容。>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<!url_for() 函数最简单的用法是以视图函数名（或者app.add_url_route() 定义路由时使用的端点名）作为参数，返回对应的URL>
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 {% endblock %}
 
@@ -42,7 +43,12 @@
 </div>
 {% endblock %}
 
-{% block scripts %}
+{% block scripts %}<!如何在基模板的scripts 块中引入monent.js>
 {{ super() }}
 {{ moment.include_moment() }}
 {% endblock %}
+<!例如，在当前版本的hello.py 程序中调用url_for('index') 得到的结果是/。调用url_for('index', _external=True) 返回的则是绝对地址，在这个示例中是http://localhost:5000/。生成连接程序内不同路由的链接时，使用相对地址就足够了。如果要生成在浏览器之外使用的链接，则必须使用绝对地址，例如在电子邮件中发送的链接。>
+
+
+
+
