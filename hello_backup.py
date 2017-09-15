@@ -47,15 +47,19 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 #配置一个简单的SQLite 数据库;SQLALCHEMY_COMMIT_ON_TEARDOWN 键，将其设为True时，每次请求结束后都会自动提交数据库中的变动.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app.config['MAIL_SERVER']='smtp.qq.com'
-app.config['MAIL_PORT']=465
-app.config['MAIL_USE_SSL']=True
-app.config['MAIL_USE_TLS']=False
-app.config['MAIL_USERNAME']=os.environ.get('2269937513@qq.com')
-app.config['MAIL_PASSWORD']=os.environ.get('ayarohilcrmnebeg')
-
+app.config['MAIL_SERVER']='smtp.163.com'
+#这里是设置每个邮箱不同的smtp服务器，由于GMAIL在国内被墙了，所以我这里使用163
+app.config['MAIL_PORT']=25
+#百度每个邮箱对应的smtp端口号
+app.config['MAIL_USE_TLS']=True
+app.config['MAIL_USERNAME']=os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD']=os.environ.get('MAIL_PASSWORD')
+#这里提示，不要将账户和密码写入代码里面，而是设置在环境变量里面读取
+#保存电子邮件服务器用户名和密码的两个环境变量要在环境中定义。如果你在Linux 或Mac OS X 中使用bash，那么可以按照下面的方式设定这两个变量：
+#(venv) $ export MAIL_USERNAME='xxxxxx@163.com'
+#(venv) $ export MAIL_PASSWORD='我自己设置的163邮箱密码'
 app.config['FLASKY_MAIL_SUBJECT_PREFIX']=['Flasky']#定义邮件主题的前缀
-app.config['FLASKY_MAIL_SENDER']='Flasky Admin <2269937513@qq.com>'#定义发件人的地址
+app.config['FLASKY_MAIL_SENDER']='Flasky Admin <flasky@example.com>'#定义发件人的地址
 app.config['FLASKY_ADMIN']=os.environ.get('FLASKY_ADMIN')
 
 manager = Manager(app)#Flask-Script 输出了一个名为Manager的类
