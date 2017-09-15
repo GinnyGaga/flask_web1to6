@@ -1,10 +1,14 @@
 import os
 from threading import Thread
+# threading提供了一个比thread模块更高层的API来提供线程的并发性。这些线程并发运行并共享内存
 from flask import Flask, render_template, session, redirect, url_for
 #redirect:重定向;reder_template:渲染模板;session:是用户会话，它是请求上下文中的变量，名为session，
 #像标准的Python 字典一样操作程序,可以把数据存储在用户会话中，在请求之间“记住”数据。
 #用户会话是一种私有存储，存在于每个连接到服务器的客户端中.默认情况下，用户会话保存在客户端cookie 中，使用设置的SECRET_KEY 进行加密签名。
 #如果篡改了cookie 中的内容，签名就会失效，会话也会随之失效。
+#推荐使用url_for() 生成URL，因为这个函数使用URL 映射生成URL，从而保证URL 和定义的路由兼容，而且修改路由名字后依然可用。
+#url_for() 函数的第一个且唯一必须指定的参数是端点名，即路由的内部名字。默认情况下，路由的端点是相应视图函数的名字。在这个示例中，
+#处理根地址的视图函数是index()，因此传给url_for() 函数的名字是index。
 from flask_script import Manager,Shell
 #Flask-Script支持命令行选项,是一个Flask 扩展，为Flask 程序添加了一个命令行解析器
 from flask_bootstrap import Bootstrap
